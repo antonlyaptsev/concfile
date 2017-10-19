@@ -1,0 +1,32 @@
+{
+  "name": "concfile",
+  "version": "1.0.0",
+  "description": "Concurrent key/value file storage",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antonlyaptsev/concfile.git"
+  },
+  "keywords": [
+    "json",
+    "file",
+    "key",
+    "value",
+    "concurrent"
+  ],
+  "author": "Anton Lyaptsev <anton.lyaptsev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/antonlyaptsev/concfile/issues"
+  },
+  "homepage": "https://github.com/antonlyaptsev/concfile#readme",
+  "devDependencies": {
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "jest": "^21.2.1"
+  }
+}
