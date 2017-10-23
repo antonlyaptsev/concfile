@@ -24,8 +24,6 @@ var loadFile = function loadFile(file) {
   }
 };
 
-var actual;
-
 function ConcurrentStorage(name, directory) {
   var data;
   this.filename = name ? name + '.json' : 'store.json';
@@ -35,7 +33,6 @@ function ConcurrentStorage(name, directory) {
 
   data = loadFile(this.file);
   this.store = Object.assign(emptyObject(), data);
-  actual = Object.assign(emptyObject(), data);
 }
 
 ConcurrentStorage.prototype.saveData = function saveData(cb) {
@@ -44,11 +41,10 @@ ConcurrentStorage.prototype.saveData = function saveData(cb) {
 
   if (!this.saving) {
     this.saving = true;
-    newStore = Object.assign(emptyObject(), actual);
+    newStore = Object.assign(emptyObject(), this.store);
     fs.writeFile(this.file, JSON.stringify(newStore), function handleError(err) {
       if (err && cb) cb(err);
       else if (err) throw err;
-      that.store = Object.assign(emptyObject(), newStore);
       that.saving = false;
       if (cb) cb(null);
     });
@@ -76,17 +72,17 @@ ConcurrentStorage.prototype.set = function set(key, value, cb) {
     throw new TypeError('Expected `key` to be of type `string`, got ' + typeof key);
   }
 
-  actual[key] = value;
+  this.store[key] = value;
   this.saveData(cb);
 };
 
 ConcurrentStorage.prototype.delete = function deleteKey(key, cb) {
-  delete actual[key];
+  delete this.store[key];
   this.saveData(cb);
 };
 
 ConcurrentStorage.prototype.clear = function clear(cb) {
-  actual = emptyObject();
+  this.store = emptyObject();
   this.saveData(cb);
 };
 

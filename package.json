@@ -1,6 +1,6 @@
 {
   "name": "concfile",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Concurrent key/value file storage",
   "main": "index.js",
   "scripts": {
